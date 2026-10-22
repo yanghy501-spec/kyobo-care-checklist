@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>나를 위한 맞춤관리 체크리스트 | 교보생명 유성미래지점</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2; --card:#FFFFFF; --ink:#22262B; --sub:#666C72; --line:#E7E1D8;
+  --green:#4F6B47; --green-soft:#EEF2EA; --peach:#FBEFE6; --peach-ink:#A0582A;
+  --blue:#2B4C8C; --blue-soft:#EAF1FA; --sage-soft:#EFF3EC; --err:#B83A28;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  -webkit-font-smoothing:antialiased;word-break:keep-all}
+.wrap{max-width:480px;margin:0 auto;padding:22px 16px 40px}
+.eyebrow{font-size:11px;letter-spacing:.32em;color:var(--sub)}
+h1{font-family:"Noto Serif KR",serif;font-size:31px;line-height:1.3;margin:12px 0 10px;font-weight:700;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--green)}
+.lead{color:var(--sub);font-size:15.5px;line-height:1.6;margin:0 0 22px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;margin-bottom:14px}
+.sec h2{font-size:17px;margin:0 0 4px;font-weight:800}
+.sec .desc{font-size:13px;color:var(--sub);margin:0 0 12px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+.field label em{color:var(--err);font-style:normal;margin-left:2px}
+.input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.input:focus{outline:none;border-color:var(--green)}
+textarea.input{min-height:76px;resize:vertical}
+.group{border-radius:14px;padding:14px;margin-bottom:10px}
+.group.asset{background:var(--peach)}
+.group.biz{background:var(--blue-soft)}
+.group.cover{background:var(--sage-soft)}
+.group .gt{font-size:15.5px;font-weight:800;margin-bottom:2px}
+.group .gd{font-size:12.5px;color:var(--sub);margin-bottom:8px}
+.checks{display:grid;gap:6px}
+.chk{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.75);border:1.5px solid transparent;border-radius:10px;padding:11px 12px;font-size:15px;cursor:pointer}
+.chk input{width:20px;height:20px;margin:0;accent-color:var(--green);flex:none}
+.chk:has(input:checked){border-color:var(--green);background:#fff;font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;pointer-events:none}
+.pill span{display:block;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:14.5px;background:#fff;cursor:pointer}
+.pill input:checked+span{border-color:var(--green);background:var(--green-soft);color:var(--green);font-weight:700}
+.sub-label{font-size:13.5px;font-weight:700;margin:12px 0 8px}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5;margin-bottom:8px}
+.agree input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--green);flex:none}
+details{font-size:12.5px;color:var(--sub);line-height:1.65;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 12px}
+details summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.err{color:var(--err);font-size:13.5px;min-height:20px;margin:6px 0}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:17px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;background:var(--green);color:#fff}
+.btn:disabled{background:#A6B5A1}
+.closing{font-family:"Noto Serif KR",serif;font-size:19px;color:var(--green);margin:22px 0 4px;text-align:center}
+.foot{font-size:13px;color:var(--sub);text-align:center;line-height:1.6}
+.brand{margin-top:18px;text-align:center;font-weight:800;color:#1F3B7A;font-size:15px}
+.brand span{color:var(--green);margin-left:6px}
+.demo{display:none;font-size:11px;background:#FFF1D6;color:#8A5A00;padding:3px 8px;border-radius:999px;float:right}
+.done{display:none;text-align:center;padding:60px 8px}
+.done h2{font-family:"Noto Serif KR",serif;font-size:24px;margin:0 0 12px}
+.done p{color:var(--sub);line-height:1.7;margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="form-view">
+    <span class="demo" id="demo">미리보기 모드</span>
+    <div class="eyebrow">· PERSONAL CARE</div>
+    <h1>나를 위한<br><em>맞춤관리</em> 체크리스트</h1>
+    <p class="lead">체크해 주신 관심 분야를 바탕으로 필요한 정보만 안내해 드립니다.</p>
+
+    <div class="sec">
+      <h2>기본정보</h2>
+      <p class="desc">보다 정확한 정보 안내를 위해 작성해 주세요.</p>
+      <div class="field"><label for="f-name">성함<em>*</em></label><input class="input" id="f-name" autocomplete="name"></div>
+      <div class="field"><label for="f-birth">생년월일</label><input class="input" id="f-birth" inputmode="numeric" placeholder="예) 19750315" maxlength="10"></div>
+      <div class="field"><label for="f-phone">연락처<em>*</em></label><input class="input" id="f-phone" type="tel" inputmode="tel" placeholder="010-0000-0000" autocomplete="tel"></div>
+      <div class="field" style="margin-bottom:0"><label for="f-hosp">병원 / 진료과</label><input class="input" id="f-hosp" placeholder="예) OO정형외과 / 정형외과"></div>
+    </div>
+
+    <div class="sec">
+      <h2>관심 분야</h2>
+      <p class="desc">해당 항목만 체크해 주세요.</p>
+
+      <div class="group asset">
+        <div class="gt">자산관리</div><div class="gd">지금의 자산을 내일의 안정으로</div>
+        <div class="checks" data-group="자산관리">
+          <label class="chk"><input type="checkbox" value="상속">상속</label>
+          <label class="chk"><input type="checkbox" value="증여">증여</label>
+          <label class="chk"><input type="checkbox" value="절세 관련 정보">절세 관련 정보</label>
+          <label class="chk"><input type="checkbox" value="은퇴·노후 준비">은퇴·노후 준비</label>
+          <label class="chk"><input type="checkbox" value="자산 이전">자산 이전</label>
+        </div>
+      </div>
+
+      <div class="group biz">
+        <div class="gt">사업장·노무관리</div><div class="gd">안정적인 운영을 위한 준비</div>
+        <div class="checks" data-group="사업장·노무관리">
+          <label class="chk"><input type="checkbox" value="단체보험">단체보험</label>
+          <label class="chk"><input type="checkbox" value="단체협약·다윈서비스(CS·AI교육)">단체협약 · 다윈서비스(CS·AI교육)</label>
+          <label class="chk"><input type="checkbox" value="종업원 퇴직금">종업원 퇴직금</label>
+          <label class="chk"><input type="checkbox" value="CEO 보장">CEO 보장</label>
+          <label class="chk"><input type="checkbox" value="사업장 리스크 관리">사업장 리스크 관리</label>
+        </div>
+      </div>
+
+      <div class="group cover" style="margin-bottom:0">
+        <div class="gt">보장관리</div><div class="gd">나와 가족의 든든한 오늘</div>
+        <div class="checks" data-group="보장관리">
+          <label class="chk"><input type="checkbox" value="개인 보장분석">개인 보장분석</label>
+          <label class="chk"><input type="checkbox" value="가족 보장분석">가족 보장분석</label>
+          <label class="chk"><input type="checkbox" value="기존 보험 점검">기존 보험 점검</label>
+          <label class="chk"><input type="checkbox" value="보험료·보장내용 점검">보험료·보장내용 점검</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="field"><label for="f-etc">기타 관심사항</label><input class="input" id="f-etc"></div>
+      <div class="field" style="margin-bottom:0"><label for="f-q">현재 가장 궁금하거나 고민되는 부분이 있으신가요?</label><textarea class="input" id="f-q"></textarea></div>
+    </div>
+
+    <div class="sec">
+      <h2>원하시는 안내 방식</h2>
+      <div class="pills" id="g-guide">
+        <label class="pill"><input type="checkbox" value="핵심만 간단히"><span>핵심만 간단히</span></label>
+        <label class="pill"><input type="checkbox" value="자료로 자세히"><span>자료로 자세히</span></label>
+        <label class="pill"><input type="checkbox" value="상담을 통해 설명"><span>상담을 통해 설명</span></label>
+        <label class="pill"><input type="checkbox" value="추천해 주세요"><span>추천해 주세요</span></label>
+      </div>
+      <div class="sub-label">연락하기 편한 방법</div>
+      <div class="pills" id="g-method">
+        <label class="pill"><input type="checkbox" value="전화"><span>전화</span></label>
+        <label class="pill"><input type="checkbox" value="문자"><span>문자</span></label>
+        <label class="pill"><input type="checkbox" value="카카오톡"><span>카카오톡</span></label>
+      </div>
+      <div class="sub-label">편한 시간대</div>
+      <div class="pills" id="g-time">
+        <label class="pill"><input type="checkbox" value="오전"><span>오전</span></label>
+        <label class="pill"><input type="checkbox" value="오후"><span>오후</span></label>
+        <label class="pill"><input type="checkbox" value="저녁"><span>저녁</span></label>
+        <label class="pill"><input type="checkbox" value="상관없음"><span>상관없음</span></label>
+      </div>
+    </div>
+
+    <div class="sec">
+      <label class="agree"><input type="checkbox" id="f-privacy"><span><b>[필수]</b> 개인정보 수집·이용에 동의합니다</span></label>
+      <details><summary>내용 보기</summary><div id="privacy-text"></div></details>
+      <label class="agree" style="margin-bottom:0"><input type="checkbox" id="f-mkt"><span>[선택] 상품·서비스 안내 수신에 동의합니다</span></label>
+    </div>
+
+    <div class="err" id="f-err"></div>
+    <button class="btn" id="btn-submit">제출하기</button>
+
+    <p class="closing">체크만 해주셔도 충분합니다.</p>
+    <p class="foot">관심 있는 내용부터 필요한 만큼 편하게 안내해 드리겠습니다.</p>
+    <div class="brand">KYOBO 교보생명<span>| 유성미래지점</span></div>
+  </div>
+
+  <div class="done" id="done-view">
+    <h2>감사합니다</h2>
+    <p>체크해 주신 내용을 확인하고<br>편하신 방법과 시간에 맞춰 연락드리겠습니다.</p>
+    <div class="brand" style="margin-top:30px">KYOBO 교보생명<span>| 유성미래지점</span></div>
+  </div>
+</div>
+
+<script>
+/* ===== 설정: 배포 전 회사 기준으로 확인해 주세요 ===== */
+const CONFIG = {
+  ENDPOINT: "",                         // 응답 수집 주소 (비워 두면 저장 안 함)
+  PURPOSE: "관심 분야에 대한 정보 안내 및 상담 연락",
+  ITEMS: "성함, 생년월일, 연락처, 병원·진료과, 관심 분야, 문의 내용, 안내·연락 희망 방식",
+  RETENTION: "수집일로부터 1년"          // 보유 기간
+};
+const $ = id => document.getElementById(id);
+const src = new URLSearchParams(location.search).get("src") || "direct";
+if(!CONFIG.ENDPOINT) $("demo").style.display = "inline-block";
+
+$("privacy-text").innerHTML =
+  "· 수집 목적: "+CONFIG.PURPOSE+"<br>· 수집 항목: "+CONFIG.ITEMS+
+  "<br>· 보유 기간: "+CONFIG.RETENTION+" 후 파기<br>· 동의를 거부하실 수 있으며, 거부하시면 안내를 받으실 수 없습니다.";
+
+const picked = sel => [...document.querySelectorAll(sel+" input:checked")].map(i=>i.value).join(", ");
+
+$("btn-submit").onclick = async ()=>{
+  const name=$("f-name").value.trim(), phone=$("f-phone").value.trim(), birth=$("f-birth").value.trim();
+  const err=$("f-err");
+  if(!name) return err.textContent="성함을 적어 주세요.";
+  if(!/^[0-9\-\s]{9,14}$/.test(phone)) return err.textContent="연락처를 확인해 주세요.";
+  if(birth && !/^\d{4}[.\-]?\d{2}[.\-]?\d{2}$/.test(birth)) return err.textContent="생년월일은 8자리 숫자로 적어 주세요.";
+  if(!$("f-privacy").checked) return err.textContent="개인정보 수집·이용 동의가 필요합니다.";
+  err.textContent="";
+  const btn=$("btn-submit"); btn.disabled=true; btn.textContent="보내는 중";
+  const data = {type:"checklist", src, ts:new Date().toISOString(), name, birth, phone,
+    hosp:$("f-hosp").value.trim(),
+    asset:picked('[data-group="자산관리"]'), biz:picked('[data-group="사업장·노무관리"]'), cover:picked('[data-group="보장관리"]'),
+    etc:$("f-etc").value.trim(), question:$("f-q").value.trim(),
+    guide:picked("#g-guide"), method:picked("#g-method"), time:picked("#g-time"),
+    mkt:$("f-mkt").checked?"Y":"N"};
+  if(CONFIG.ENDPOINT){
+    try{ await fetch(CONFIG.ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)}); }catch(e){}
+  } else console.log("[미리보기] 전송 데이터", data);
+  $("form-view").style.display="none"; $("done-view").style.display="block"; window.scrollTo(0,0);
+};
+</script>
+</body>
+</html>
